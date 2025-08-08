@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Lista de Atendimentos</h2>
+    <a href="{{ url_for('main.agendar_atendimento') }}" class="btn btn-success mb-3">
+        <i class="bi bi-plus-circle"></i> Novo Atendimento
+    </a>
+    
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Data/Hora</th>
+                    <th>Paciente</th>
+                    <th>Descrição</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for atendimento in atendimentos %}
+                <tr>
+                    <td>{{ atendimento.data.strftime('%d/%m/%Y %H:%M') }}</td>
+                    <td>{{ atendimento.paciente.nome }}</td>
+                    <td>{{ atendimento.descricao[:50] }}{% if atendimento.descricao|length > 50 %}...{% endif %}</td>
+                    <td>
+                        <a href="{{ url_for('main.editar_atendimento', id=atendimento.id) }}" 
+                           class="btn btn-sm btn-warning">Editar</a>
+                        <form method="POST" 
+                              action="{{ url_for('main.excluir_atendimento', id=atendimento.id) }}" 
+                              style="display: inline;">
+                            <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Tem certeza que deseja excluir este atendimento?')">
+                                Excluir
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

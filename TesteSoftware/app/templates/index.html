@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-4">Bem-vindo à Clínica de Fisioterapia</h1>
+
+    {% if current_user.is_authenticated %}
+        <div class="alert alert-info mt-3">
+            Você está logado como: <strong>{{ current_user.username }}</strong>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                <h4>Gerenciamento de Pacientes</h4>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-3">
+                    <a href="{{ url_for('main.cadastrar_paciente') }}" class="btn btn-primary btn-lg">
+                        <i class="bi bi-person-plus"></i> Cadastrar Novo Paciente
+                    </a>
+                    <a href="{{ url_for('main.listar_pacientes') }}" class="btn btn-secondary btn-lg">
+                        <i class="bi bi-list-ul"></i> Listar Todos os Pacientes
+                    </a>
+                    <a href="{{ url_for('main.buscar_paciente') }}" class="btn btn-info btn-lg">
+                        <i class="bi bi-search"></i> Buscar/Editar Paciente
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-danger">
+                <i class="bi bi-box-arrow-right"></i> Sair do Sistema
+            </a>
+        </div>
+    {% else %}
+        <div class="alert alert-warning mt-4">
+            Você precisa estar logado para acessar o sistema.
+        </div>
+        <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-lg">
+            <i class="bi bi-box-arrow-in-right"></i> Fazer Login
+        </a>
+    {% endif %}
+</div>
+{% endblock %}

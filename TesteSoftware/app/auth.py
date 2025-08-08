@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
-from flask_login import login_user, logout_user, login_required  # Adicione login_required se necessário
+from flask_login import login_user, logout_user, login_required 
 from werkzeug.security import check_password_hash
 from .models import Usuario
 from .forms import LoginForm
@@ -26,4 +26,5 @@ def login():
 def logout():
     logout_user()
     flash('Você foi desconectado com sucesso.')
+
     return redirect(url_for('auth.login'))

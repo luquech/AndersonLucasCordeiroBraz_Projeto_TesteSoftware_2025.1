@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField, DateTimeLocalField
 from wtforms.validators import DataRequired, Email, Length, Optional, ValidationError
-from app.models import Paciente  # Adicione esta linha no início do arquivo
+from app.models import Paciente 
 from datetime import datetime
 import re
 
@@ -51,4 +51,5 @@ class AtendimentoForm(FlaskForm):
                             validators=[DataRequired()])
     descricao = TextAreaField('Descrição', validators=[DataRequired()])
     submit = SubmitField('Atualizar')
+
 
